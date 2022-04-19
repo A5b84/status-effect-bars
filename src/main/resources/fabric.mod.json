@@ -4,10 +4,10 @@
   "version": "${version}",
 
   "name": "Status Effect Bars",
-  "description": "Adds small configurable bars to the status effects HUD to show their remaining duration.",
+  "description": "Adds small customizable bars to the status effects overlay and in the inventory to show the remaining duration of effects.",
   "authors": ["Neecko5b84"],
   "contact": {
-    "homepage": "https://github.com/A5b84/status-effect-bars",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/status-effect-bars",
     "issues": "https://github.com/A5b84/status-effect-bars/issues",
     "sources": "https://github.com/A5b84/status-effect-bars"
   },
@@ -23,6 +23,7 @@
   "mixins": ["status-effect-bars.mixins.json"],
 
   "depends": {
+    "minecraft": ">=1.18-",
     "fabricloader": ">=0.13.3",
     "cloth-config2": ">=4.9.0"
   },

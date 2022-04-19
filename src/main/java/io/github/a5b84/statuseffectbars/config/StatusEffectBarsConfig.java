@@ -3,17 +3,16 @@ package io.github.a5b84.statuseffectbars.config;
 import io.github.a5b84.statuseffectbars.StatusEffectBars;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.Category;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.ColorPicker;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDisplayOption;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.PrefixText;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.TransitiveObject;
 import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
-
-import java.util.function.ToIntBiFunction;
 
 @Config(name = StatusEffectBars.ID)
 public class StatusEffectBarsConfig implements ConfigData {
@@ -40,19 +39,6 @@ public class StatusEffectBarsConfig implements ConfigData {
         return colorMode.getColor(this, effect);
     }
 
-    // Layout
-
-    @PrefixText
-    @EnumHandler(option = EnumDisplayOption.BUTTON)
-    public Direction direction = Direction.LEFT_TO_RIGHT;
-
-    public int thickness = 1;
-    @Tooltip public int collinearPadding = 3;
-    /** Offset along the bar's main axis */
-    @Tooltip public int collinearOffset = 0;
-    /** Offset perpendicular to the bar */
-    @Tooltip public int orthogonalOffset = StatusEffectBars.PLATE_SIZE - 3;
-
     // Behavior
 
     /**
@@ -61,61 +47,56 @@ public class StatusEffectBarsConfig implements ConfigData {
      */
     @PrefixText
     @Tooltip(count = 2)
-    public int maxRemainingDuration = Short.MAX_VALUE - 1;
+    public int maxRemainingDuration = Integer.MAX_VALUE;
 
     /**
      * Age in ticks under which the bar of ambient (i.e. beacon) effects is hidden
      * @see BeaconBlockEntity#tick
      */
     @Tooltip(count = 2)
-    public int minAmbientAge = 80 + 5;
+    public int minAmbientAge = 80 + 10;
+
+    // Layout
+
+    @Category("hud")
+    @TransitiveObject
+    public LayoutConfig hudLayout = new LayoutConfig(3, 2);
+
+    @Category("inventory")
+    @TransitiveObject
+    public LayoutConfig inventoryLayout = new LayoutConfig(4, 3);
 
 
-    public enum ColorMode {
-        EFFECT_COLOR((config, effect) -> effect.getEffectType().getColor() | 0xff000000),
-        @SuppressWarnings("ConstantConditions")
-        CATEGORY_COLOR((config, effect) -> effect.getEffectType().getCategory().getFormatting().getColorValue() | 0xff000000),
-        CUSTOM((config, effect) -> switch (effect.getEffectType().getCategory()) {
-            case BENEFICIAL -> config.beneficialForegroundColor;
-            case HARMFUL -> config.harmfulForegroundColor;
-            default -> config.neutralForegroundColor;
-        });
+    public static class LayoutConfig {
 
-        private final ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> provider;
+        public boolean enabled = true;
 
-        ColorMode(ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> provider) {
-            this.provider = provider;
-        }
+        // Position
 
-        public int getColor(StatusEffectBarsConfig config, StatusEffectInstance effect) {
-            return provider.applyAsInt(config, effect);
-        }
+        @PrefixText
+        @EnumHandler(option = EnumDisplayOption.BUTTON)
+        public Direction direction = Direction.LEFT_TO_RIGHT;
+        /** Whether the bar is placed relative to the end (bottom/right) or
+         * the start (top/left) of the effect rectangle */
+        @Tooltip(count = 2) public boolean relativeToEnd = true;
 
-        @Override
-        public String toString() {
-            return I18n.translate("text.autoconfig.status-effect-bars.option.colorMode." + name());
-        }
-    }
+        // Shape
 
+        @PrefixText
+        public int thickness = 1;
+        @Tooltip public int collinearPadding;
 
-    @SuppressWarnings("unused")
-    public enum Direction {
-        LEFT_TO_RIGHT(false, false),
-        RIGHT_TO_LEFT(false, true),
-        BOTTOM_TO_TOP(true, true),
-        TOP_TO_BOTTOM(true, false);
+        // Fine-tuning
 
-        public final boolean swapXY;
-        public final boolean reverseAxis;
+        /** Offset along the bar's main axis */
+        @PrefixText
+        @Tooltip public int collinearOffset = 0;
+        /** Offset perpendicular to the bar */
+        @Tooltip public int orthogonalOffset;
 
-        Direction(boolean swapXY, boolean reverseAxis) {
-            this.swapXY = swapXY;
-            this.reverseAxis = reverseAxis;
-        }
-
-        @Override
-        public String toString() {
-            return I18n.translate("text.autoconfig.status-effect-bars.option.direction." + name());
+        public LayoutConfig(int collinearPadding, int orthogonalOffset) {
+            this.collinearPadding = collinearPadding;
+            this.orthogonalOffset = orthogonalOffset;
         }
     }
 

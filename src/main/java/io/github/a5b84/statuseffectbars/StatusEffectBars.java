@@ -8,8 +8,6 @@ import net.fabricmc.api.ClientModInitializer;
 public class StatusEffectBars implements ClientModInitializer {
 
     public static final String ID = "status-effect-bars";
-    /** Size of the square plate behind the status effect sprites in the HUD */
-    public static final int PLATE_SIZE = 24;
 
     public static StatusEffectBarsConfig config;
 

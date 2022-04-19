@@ -4,6 +4,7 @@
   "package": "io.github.a5b84.statuseffectbars.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "AbstractInventoryScreenMixin",
     "InGameHudMixin",
     "LivingEntityMixin",
     "StatusEffectInstanceMixin"
