@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.modid.title": "Example Mod Config",
+
+  "text.autoconfig.modid.category.default": "General Settings",
+
+  "text.autoconfig.modid.option.something": "Something"
+}

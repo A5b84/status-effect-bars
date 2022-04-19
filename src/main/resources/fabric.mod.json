@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "modid",
+  "version": "${version}",
+
+  "name": "Example Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": ["Neecko5b84"],
+  "contact": {
+    "homepage": "https://github.com/A5b84/fabric-example-mod",
+    "issues": "https://github.com/A5b84/fabric-example-mod/issues",
+    "sources": "https://github.com/A5b84/fabric-example-mod"
+  },
+
+  "license": "LGPL-3.0-or-later",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": ["io.github.a5b84.example.ExampleMod"],
+    "modmenu": ["io.github.a5b84.example.config.ModMenuIntegration"]
+  },
+  "mixins": ["modid.mixins.json"],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "cloth-config2": ">=4.9.0"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
