@@ -1,0 +1,42 @@
+{
+  "text.autoconfig.status-effect-bars.title": "Status Effect Bars Config",
+
+  "text.autoconfig.status-effect-bars.category.default": "General Settings",
+
+  "text.autoconfig.status-effect-bars.option.colorMode.@PrefixText": "Color settings",
+  "text.autoconfig.status-effect-bars.option.colorMode": "Color Mode",
+  "text.autoconfig.status-effect-bars.option.colorMode.EFFECT_COLOR": "Effect",
+  "text.autoconfig.status-effect-bars.option.colorMode.CATEGORY_COLOR": "Category",
+  "text.autoconfig.status-effect-bars.option.colorMode.CUSTOM": "Custom",
+  "text.autoconfig.status-effect-bars.option.colorMode.@Tooltip[0]": "Method of determining colors.",
+  "text.autoconfig.status-effect-bars.option.colorMode.@Tooltip[1]": "Effect: the effect's color",
+  "text.autoconfig.status-effect-bars.option.colorMode.@Tooltip[2]": "Category: the effect category's color",
+  "text.autoconfig.status-effect-bars.option.colorMode.@Tooltip[3]": "Custom: colors set in the fields below",
+  "text.autoconfig.status-effect-bars.option.backgroundColor": "Background Color",
+  "text.autoconfig.status-effect-bars.option.beneficialForegroundColor.@PrefixText": "Custom-mode-only colors",
+  "text.autoconfig.status-effect-bars.option.beneficialForegroundColor": "Benificial Bar Color",
+  "text.autoconfig.status-effect-bars.option.harmfulForegroundColor": "Harmful Bar Color",
+  "text.autoconfig.status-effect-bars.option.neutralForegroundColor": "Neutral Bar Color",
+
+  "text.autoconfig.status-effect-bars.option.direction.@PrefixText": "Layout settings",
+  "text.autoconfig.status-effect-bars.option.direction": "Direction",
+  "text.autoconfig.status-effect-bars.option.direction.LEFT_TO_RIGHT": "Left to Right",
+  "text.autoconfig.status-effect-bars.option.direction.RIGHT_TO_LEFT": "Right to Left",
+  "text.autoconfig.status-effect-bars.option.direction.BOTTOM_TO_TOP": "Bottom to Top",
+  "text.autoconfig.status-effect-bars.option.direction.TOP_TO_BOTTOM": "Top to Bottom",
+  "text.autoconfig.status-effect-bars.option.thickness": "Thickness",
+  "text.autoconfig.status-effect-bars.option.collinearPadding": "Collinear Padding",
+  "text.autoconfig.status-effect-bars.option.collinearPadding.@Tooltip": "Padding on both sides of the bar",
+  "text.autoconfig.status-effect-bars.option.collinearOffset": "Collinear Offset",
+  "text.autoconfig.status-effect-bars.option.collinearOffset.@Tooltip": "Offset along the bar's main axis",
+  "text.autoconfig.status-effect-bars.option.orthogonalOffset": "Orthogonal Offset",
+  "text.autoconfig.status-effect-bars.option.orthogonalOffset.@Tooltip": "Offset perpendicular to the bar",
+
+  "text.autoconfig.status-effect-bars.option.maxRemainingDuration.@PrefixText": "Behavior settings",
+  "text.autoconfig.status-effect-bars.option.maxRemainingDuration": "Maximum Remaining Duration",
+  "text.autoconfig.status-effect-bars.option.maxRemainingDuration.@Tooltip[0]": "Remaining duration in ticks",
+  "text.autoconfig.status-effect-bars.option.maxRemainingDuration.@Tooltip[1]": "above which the bar is hidden",
+  "text.autoconfig.status-effect-bars.option.minAmbientAge": "Minimum Beacon Effect Age",
+  "text.autoconfig.status-effect-bars.option.minAmbientAge.@Tooltip[0]": "Age in ticks under which the bar",
+  "text.autoconfig.status-effect-bars.option.minAmbientAge.@Tooltip[1]": "of Beacon effects is hidden"
+}

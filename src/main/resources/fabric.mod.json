@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "status-effect-bars",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Status Effect Bars",
+  "description": "Adds small configurable bars to the status effects HUD to show their remaining duration.",
   "authors": ["Neecko5b84"],
   "contact": {
-    "homepage": "https://github.com/A5b84/fabric-example-mod",
-    "issues": "https://github.com/A5b84/fabric-example-mod/issues",
-    "sources": "https://github.com/A5b84/fabric-example-mod"
+    "homepage": "https://github.com/A5b84/status-effect-bars",
+    "issues": "https://github.com/A5b84/status-effect-bars/issues",
+    "sources": "https://github.com/A5b84/status-effect-bars"
   },
 
   "license": "LGPL-3.0-or-later",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/status-effect-bars/icon.png",
 
   "environment": "client",
   "entrypoints": {
-    "client": ["io.github.a5b84.example.ExampleMod"],
-    "modmenu": ["io.github.a5b84.example.config.ModMenuIntegration"]
+    "client": ["io.github.a5b84.statuseffectbars.StatusEffectBars"],
+    "modmenu": ["io.github.a5b84.statuseffectbars.config.ModMenuIntegration"]
   },
-  "mixins": ["modid.mixins.json"],
+  "mixins": ["status-effect-bars.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.13.3",
