@@ -25,10 +25,10 @@ public abstract class AbstractInventoryScreenMixin {
             locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void onDrawStatusEffectBackground(
             MatrixStack matrices, int x, int verticalSpacing,
-            Iterable<StatusEffectInstance> effects, boolean wide,
+            Iterable<StatusEffectInstance> effects,
             CallbackInfo ci, int y, Iterator<StatusEffectInstance> it,
             StatusEffectInstance effect) {
-        StatusEffectBarRenderer.render(matrices, effect, x, y, wide ? 120 : 32, 32, config.inventoryLayout);
+        StatusEffectBarRenderer.render(matrices, effect, x, y, 120, 32, config.inventoryLayout);
     }
 
 }
