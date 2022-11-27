@@ -16,7 +16,7 @@ public class StatusEffectBarRenderer {
 
         if (!layoutConfig.enabled) return;
 
-        if (effect.getDuration() > config.maxRemainingDuration || effect.isPermanent()) {
+        if (effect.getDuration() > config.maxRemainingDuration) {
             return; // Too much time remaining
         }
 
