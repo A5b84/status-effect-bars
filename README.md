@@ -12,5 +12,6 @@ Requires Cloth Config ([CurseForge](https://www.curseforge.com/minecraft/mc-mods
 ## Credits
 - Potentially inspired by [SkyUI](https://www.nexusmods.com/skyrim/mods/3863)'s active effects HUD
 - Config screen powered by Cloth Config
+- `pt_br` translation by [FITFC](https://github.com/FITFC)
 
 Links: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/status-effect-bars) · [GitHub](https://github.com/A5b84/status-effect-bars) · [Modrinth](https://modrinth.com/mod/status-effect-bars)
