@@ -1,36 +1,43 @@
 {
-  "schemaVersion": 1,
-  "id": "status-effect-bars",
-  "version": "${version}",
-
-  "name": "Status Effect Bars",
-  "description": "Adds small customizable bars to the status effects overlay and in the inventory to show the remaining duration of effects.",
-  "authors": ["Neecko5b84"],
-  "contributors": [
-    "FITFC"
-  ],
-  "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/status-effect-bars",
-    "issues": "https://github.com/A5b84/status-effect-bars/issues",
-    "sources": "https://github.com/A5b84/status-effect-bars"
-  },
-
-  "license": "LGPL-3.0-or-later",
-  "icon": "assets/status-effect-bars/icon.png",
-
-  "environment": "client",
-  "entrypoints": {
-    "client": ["io.github.a5b84.statuseffectbars.StatusEffectBars"],
-    "modmenu": ["io.github.a5b84.statuseffectbars.config.ModMenuIntegration"]
-  },
-  "mixins": ["status-effect-bars.mixins.json"],
-
-  "depends": {
-    "minecraft": ">=1.19.3-",
-    "fabricloader": ">=0.13.3",
-    "cloth-config2": ">=4.9.0"
-  },
-  "suggests": {
-    "modmenu": "*"
-  }
+	"schemaVersion": 1,
+	"id": "status-effect-bars",
+	"version": "${version}",
+	"name": "Status Effect Bars",
+	"description": "Adds small customizable bars to the status effects overlay and in the inventory to show the remaining duration of effects.",
+	"authors": [
+		"Neecko5b84"
+	],
+	"contributors": [
+		"FITFC"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/status-effect-bars",
+		"issues": "https://github.com/A5b84/status-effect-bars/issues",
+		"sources": "https://github.com/A5b84/status-effect-bars"
+	},
+	"license": "LGPL-3.0-or-later",
+	"icon": "assets/status-effect-bars/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"io.github.a5b84.statuseffectbars.StatusEffectBars"
+		],
+		"modmenu": [
+			"io.github.a5b84.statuseffectbars.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{
+			"config": "status-effect-bars.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"minecraft": ">=1.20-",
+		"fabricloader": ">=0.14.21",
+		"cloth-config2": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
 }

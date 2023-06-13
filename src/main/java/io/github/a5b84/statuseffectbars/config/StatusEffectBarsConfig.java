@@ -12,9 +12,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.TransitiveObject;
 import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
 
-@Config(name = StatusEffectBars.ID)
+@Config(name = StatusEffectBars.MOD_ID)
 public class StatusEffectBarsConfig implements ConfigData {
 
     // Color
@@ -43,7 +42,6 @@ public class StatusEffectBarsConfig implements ConfigData {
 
     /**
      * Remaining duration in ticks above which the bar is hidden
-     * @see EntityStatusEffectS2CPacket#isPermanent()
      */
     @PrefixText
     @Tooltip(count = 2)

@@ -1,8 +1,7 @@
 package io.github.a5b84.statuseffectbars;
 
 import io.github.a5b84.statuseffectbars.config.StatusEffectBarsConfig.LayoutConfig;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.math.MathHelper;
 
@@ -11,12 +10,12 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 public class StatusEffectBarRenderer {
 
     @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(MatrixStack matrices, StatusEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
+    public static void render(DrawContext context, StatusEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
         // Special cases where the bar is hidden
 
         if (!layoutConfig.enabled) return;
 
-        if (effect.getDuration() > config.maxRemainingDuration) {
+        if (effect.getDuration() > config.maxRemainingDuration || effect.isInfinite()) {
             return; // Too much time remaining
         }
 
@@ -54,7 +53,7 @@ public class StatusEffectBarRenderer {
         }
 
         float progress = (float) effect.getDuration() / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
-        middleX = Math.round(MathHelper.lerp(progress, startX, endX));
+        middleX = MathHelper.lerp(progress, startX, endX);
 
         startY = layoutConfig.orthogonalOffset;
         if (layoutConfig.relativeToEnd) {
@@ -87,8 +86,8 @@ public class StatusEffectBarRenderer {
         middleY += y;
         endY += y;
 
-        DrawableHelper.fill(matrices, startX, startY, middleX, middleY, config.getColor(effect));
-        DrawableHelper.fill(matrices, middleX, middleY, endX, endY, config.backgroundColor);
+        context.fill(startX, startY, middleX, middleY, config.getColor(effect));
+        context.fill(middleX, middleY, endX, endY, config.backgroundColor);
     }
 
 }

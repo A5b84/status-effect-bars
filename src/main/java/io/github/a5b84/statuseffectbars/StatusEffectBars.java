@@ -7,7 +7,7 @@ import net.fabricmc.api.ClientModInitializer;
 
 public class StatusEffectBars implements ClientModInitializer {
 
-    public static final String ID = "status-effect-bars";
+    public static final String MOD_ID = "status-effect-bars";
 
     public static StatusEffectBarsConfig config;
 

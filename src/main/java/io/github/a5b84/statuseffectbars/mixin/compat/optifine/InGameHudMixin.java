@@ -3,9 +3,8 @@ package io.github.a5b84.statuseffectbars.mixin.compat.optifine;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +23,7 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
  * but without locals capture.)
  */
 @Mixin(InGameHud.class)
-public abstract class InGameHudMixin extends DrawableHelper {
+public abstract class InGameHudMixin {
 
     @Unique private static final int ICON_SIZE = 24;
 
@@ -50,7 +49,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
 
     @Inject(method = "renderStatusEffectOverlay",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/entity/effect/StatusEffect;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
-    private void onRenderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
+    private void onRenderStatusEffectOverlay(DrawContext context, CallbackInfo ci) {
         // Mirroring vanilla behavior (easier than capturing locals because of OptiFine)
         int x = scaledWidth;
         int y = 1;
@@ -65,7 +64,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
             y += ICON_SIZE + 2;
         }
 
-        StatusEffectBarRenderer.render(matrices, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+        StatusEffectBarRenderer.render(context, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
         RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 

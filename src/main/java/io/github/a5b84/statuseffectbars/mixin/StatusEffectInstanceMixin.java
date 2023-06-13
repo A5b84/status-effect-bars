@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceDuck {
 
     @Unique private int maxDuration;
-    @Shadow int duration;
+    @Shadow private int duration;
 
     @Inject(method = "<init>(Lnet/minecraft/entity/effect/StatusEffect;IIZZZLnet/minecraft/entity/effect/StatusEffectInstance;Ljava/util/Optional;)V",
             at = @At("RETURN"))
