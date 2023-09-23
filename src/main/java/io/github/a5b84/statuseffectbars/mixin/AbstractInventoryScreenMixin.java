@@ -21,7 +21,7 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 public abstract class AbstractInventoryScreenMixin {
 
     @Inject(method = "drawStatusEffectBackgrounds",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIII)V", shift = At.Shift.AFTER),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void onDrawStatusEffectBackground(
             DrawContext context, int x, int verticalSpacing,
