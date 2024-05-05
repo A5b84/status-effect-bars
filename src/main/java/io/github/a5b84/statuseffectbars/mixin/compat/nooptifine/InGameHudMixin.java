@@ -7,6 +7,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.registry.entry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,15 +31,15 @@ public abstract class InGameHudMixin {
     @Unique private static final int ICON_SIZE = 24;
 
     @Inject(method = "renderStatusEffectOverlay",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/entity/effect/StatusEffect;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void onRenderStatusEffectOverlay(
-            DrawContext context, CallbackInfo ci,
+            DrawContext context, float tickDelta, CallbackInfo ci,
             Collection<StatusEffectInstance> effects, int beneficialColumn,
             int othersColumn, StatusEffectSpriteManager spriteManager,
             List<Runnable> spriteRunnables, Iterator<StatusEffectInstance> it,
-            StatusEffectInstance effect, StatusEffect type, int x, int y) {
-        StatusEffectBarRenderer.render(context, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+            StatusEffectInstance effect, RegistryEntry<StatusEffect> effectType, int x, int y) {
+        StatusEffectBarRenderer.render(context, tickDelta, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
         RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 

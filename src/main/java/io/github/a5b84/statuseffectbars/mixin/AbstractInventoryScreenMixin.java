@@ -28,7 +28,7 @@ public abstract class AbstractInventoryScreenMixin {
             Iterable<StatusEffectInstance> effects, boolean wide,
             CallbackInfo ci, int y, Iterator<StatusEffectInstance> it,
             StatusEffectInstance effect) {
-        StatusEffectBarRenderer.render(context, effect, x, y, wide ? 120 : 32, 32, config.inventoryLayout);
+        StatusEffectBarRenderer.render(context, 0, effect, x, y, wide ? 120 : 32, 32, config.inventoryLayout);
     }
 
 }

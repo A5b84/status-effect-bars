@@ -7,28 +7,28 @@ import java.util.function.ToIntBiFunction;
 
 public enum ColorMode {
     EFFECT_COLOR(
-            (config, effect) -> effect.getEffectType().getColor() | 0xff000000
+            (config, effect) -> effect.getEffectType().value().getColor() | 0xff000000
     ),
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "unused"})
     CATEGORY_COLOR(
-            (config, effect) -> effect.getEffectType().getCategory().getFormatting().getColorValue() | 0xff000000
+            (config, effect) -> effect.getEffectType().value().getCategory().getFormatting().getColorValue() | 0xff000000
     ),
-    CUSTOM(
-            (config, effect) -> switch (effect.getEffectType().getCategory()) {
+    @SuppressWarnings("unused") CUSTOM(
+            (config, effect) -> switch (effect.getEffectType().value().getCategory()) {
                 case BENEFICIAL -> config.beneficialForegroundColor;
                 case HARMFUL -> config.harmfulForegroundColor;
                 default -> config.neutralForegroundColor;
             }
     );
 
-    private final ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> provider;
+    private final ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> colorProvider;
 
-    ColorMode(ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> provider) {
-        this.provider = provider;
+    ColorMode(ToIntBiFunction<StatusEffectBarsConfig, StatusEffectInstance> colorProvider) {
+        this.colorProvider = colorProvider;
     }
 
     public int getColor(StatusEffectBarsConfig config, StatusEffectInstance effect) {
-        return provider.applyAsInt(config, effect);
+        return colorProvider.applyAsInt(config, effect);
     }
 
     @Override

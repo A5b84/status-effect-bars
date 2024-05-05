@@ -1,5 +1,6 @@
 package io.github.a5b84.statuseffectbars.mixin.compat.optifine;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
@@ -29,9 +29,7 @@ public abstract class InGameHudMixin {
 
     @Unique private int beneficialColumn;
     @Unique private int othersColumn;
-    @Unique private StatusEffectInstance effect;
 
-    @Shadow private int scaledWidth;
     @Shadow @Final private MinecraftClient client;
 
 
@@ -40,22 +38,15 @@ public abstract class InGameHudMixin {
         beneficialColumn = othersColumn = 0;
     }
 
-    @ModifyVariable(method = "renderStatusEffectOverlay",
-            at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;getEffectType()Lnet/minecraft/entity/effect/StatusEffect;"))
-    private StatusEffectInstance storeEffect(StatusEffectInstance effect) {
-        this.effect = effect;
-        return effect;
-    }
-
     @Inject(method = "renderStatusEffectOverlay",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/entity/effect/StatusEffect;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
-    private void onRenderStatusEffectOverlay(DrawContext context, CallbackInfo ci) {
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
+    private void onRenderStatusEffectOverlay(DrawContext context, float tickDelta, CallbackInfo ci, @Local StatusEffectInstance effect) {
         // Mirroring vanilla behavior (easier than capturing locals because of OptiFine)
-        int x = scaledWidth;
+        int x = context.getScaledWindowWidth();
         int y = 1;
         if (client.isDemo()) y += 15;
 
-        if (effect.getEffectType().isBeneficial()) {
+        if (effect.getEffectType().value().isBeneficial()) {
             beneficialColumn++;
             x -= (ICON_SIZE + 1) * beneficialColumn;
         } else {
@@ -64,7 +55,7 @@ public abstract class InGameHudMixin {
             y += ICON_SIZE + 2;
         }
 
-        StatusEffectBarRenderer.render(context, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+        StatusEffectBarRenderer.render(context, tickDelta, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
         RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 
