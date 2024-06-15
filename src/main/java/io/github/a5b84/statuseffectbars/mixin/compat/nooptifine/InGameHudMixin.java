@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.texture.StatusEffectSpriteManager;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,12 +35,12 @@ public abstract class InGameHudMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void onRenderStatusEffectOverlay(
-            DrawContext context, float tickDelta, CallbackInfo ci,
+            DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci,
             Collection<StatusEffectInstance> effects, int beneficialColumn,
             int othersColumn, StatusEffectSpriteManager spriteManager,
             List<Runnable> spriteRunnables, Iterator<StatusEffectInstance> it,
             StatusEffectInstance effect, RegistryEntry<StatusEffect> effectType, int x, int y) {
-        StatusEffectBarRenderer.render(context, tickDelta, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+        StatusEffectBarRenderer.render(context, tickCounter.getTickDelta(false), effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
         RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 
