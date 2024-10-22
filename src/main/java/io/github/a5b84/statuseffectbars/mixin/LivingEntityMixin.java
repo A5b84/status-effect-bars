@@ -1,5 +1,6 @@
 package io.github.a5b84.statuseffectbars.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import io.github.a5b84.statuseffectbars.StatusEffectInstanceDuck;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -8,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * Prevents effects' max duration from being overwritten.
@@ -16,10 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Inject(method = "setStatusEffect",
-            at = @At(value = "TAIL"),
-            locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    private void onSetStatusEffect(StatusEffectInstance effect, Entity source, CallbackInfo ci, StatusEffectInstance oldEffect) {
+    @Inject(method = "setStatusEffect", at = @At(value = "TAIL"))
+    private void onSetStatusEffect(StatusEffectInstance effect, Entity source, CallbackInfo ci, @Local(ordinal = 1) StatusEffectInstance oldEffect) {
         if (oldEffect != null && oldEffect.getAmplifier() == effect.getAmplifier()) {
             StatusEffectInstanceDuck duck = (StatusEffectInstanceDuck) effect;
             StatusEffectInstanceDuck oldDuck = (StatusEffectInstanceDuck) oldEffect;

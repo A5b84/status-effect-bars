@@ -6,9 +6,9 @@
 	"client": [
 		"compat.nooptifine.InGameHudMixin",
 		"compat.optifine.InGameHudMixin",
-		"AbstractInventoryScreenMixin",
 		"LivingEntityMixin",
-		"StatusEffectInstanceMixin"
+		"StatusEffectInstanceMixin",
+		"StatusEffectsDisplayMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

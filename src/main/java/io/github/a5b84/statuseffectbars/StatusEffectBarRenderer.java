@@ -2,15 +2,17 @@ package io.github.a5b84.statuseffectbars;
 
 import io.github.a5b84.statuseffectbars.config.StatusEffectBarsConfig.LayoutConfig;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Nullable;
 
 import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 
 public class StatusEffectBarRenderer {
 
     @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(DrawContext context, float tickDelta, StatusEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
+    public static void render(DrawContext context, @Nullable RenderTickCounter tickCounter, StatusEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
         // Special cases where the bar is hidden
 
         if (!layoutConfig.enabled) return;
@@ -52,6 +54,9 @@ public class StatusEffectBarRenderer {
             endX = tmp;
         }
 
+        float tickDelta = tickCounter != null
+                ? tickCounter.getTickDelta(false)
+                : 0;
         float progress = (effect.getDuration() - tickDelta) / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
         middleX = MathHelper.lerp(progress, startX, endX);
 

@@ -6,6 +6,7 @@ import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,7 +41,7 @@ public abstract class InGameHudMixin {
 
     @Inject(method = "renderStatusEffectOverlay",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
-    private void onRenderStatusEffectOverlay(DrawContext context, float tickDelta, CallbackInfo ci, @Local StatusEffectInstance effect) {
+    private void onRenderStatusEffectOverlay(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci, @Local StatusEffectInstance effect) {
         // Mirroring vanilla behavior (easier than capturing locals because of OptiFine)
         int x = context.getScaledWindowWidth();
         int y = 1;
@@ -55,7 +56,7 @@ public abstract class InGameHudMixin {
             y += ICON_SIZE + 2;
         }
 
-        StatusEffectBarRenderer.render(context, tickDelta, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+        StatusEffectBarRenderer.render(context, tickCounter, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
         RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 
