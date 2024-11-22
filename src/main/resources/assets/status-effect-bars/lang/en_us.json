@@ -14,7 +14,7 @@
   "text.autoconfig.status-effect-bars.option.colorMode.@Tooltip[3]": "Custom: colors set in the fields below",
   "text.autoconfig.status-effect-bars.option.backgroundColor": "Background Color",
   "text.autoconfig.status-effect-bars.option.beneficialForegroundColor.@PrefixText": "Custom-mode-only colors",
-  "text.autoconfig.status-effect-bars.option.beneficialForegroundColor": "Benificial Bar Color",
+  "text.autoconfig.status-effect-bars.option.beneficialForegroundColor": "Beneficial Bar Color",
   "text.autoconfig.status-effect-bars.option.harmfulForegroundColor": "Harmful Bar Color",
   "text.autoconfig.status-effect-bars.option.neutralForegroundColor": "Neutral Bar Color",
 
