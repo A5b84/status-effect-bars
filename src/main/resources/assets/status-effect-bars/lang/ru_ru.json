@@ -24,7 +24,7 @@
   "text.autoconfig.status-effect-bars.option.maxRemainingDuration.@Tooltip[1]": "ниже которой, эффекта не видно.",
   "text.autoconfig.status-effect-bars.option.minAmbientAge": "Минимальный возраст эффекта маяка",
   "text.autoconfig.status-effect-bars.option.minAmbientAge.@Tooltip[0]": "Возраст эффектов маяка в тиках",
-  "text.autoconfig.status-effect-bars.option.minAmbientAge.@Tooltip[1]": "ниже которой, эффекта не видно.",
+  "text.autoconfig.status-effect-bars.option.minAmbientAge.@Tooltip[1]": "ниже которого, эффекта не видно.",
   
   "text.autoconfig.status-effect-bars.option.direction.LEFT_TO_RIGHT": "Слева направо",
   "text.autoconfig.status-effect-bars.option.direction.RIGHT_TO_LEFT": "Справа налево",
