@@ -57,7 +57,6 @@ public abstract class InGameHudMixin {
         }
 
         StatusEffectBarRenderer.render(context, tickCounter, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
-        RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 
 }

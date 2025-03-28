@@ -1,7 +1,6 @@
 package io.github.a5b84.statuseffectbars.mixin.compat.nooptifine;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -30,7 +29,6 @@ public abstract class InGameHudMixin {
             DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci,
             @Local StatusEffectInstance effect, @Local(ordinal = 2) int x, @Local(ordinal = 3) int y) {
         StatusEffectBarRenderer.render(context, tickCounter, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
-        RenderSystem.enableBlend(); // disabled by DrawableHelper#fill
     }
 
 }

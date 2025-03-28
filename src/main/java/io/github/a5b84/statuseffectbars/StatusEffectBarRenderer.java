@@ -55,7 +55,7 @@ public class StatusEffectBarRenderer {
         }
 
         float tickDelta = tickCounter != null
-                ? tickCounter.getTickDelta(false)
+                ? tickCounter.getTickProgress(false)
                 : 0;
         float progress = (effect.getDuration() - tickDelta) / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
         middleX = MathHelper.lerp(progress, startX, endX);
