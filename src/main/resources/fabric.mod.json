@@ -5,11 +5,14 @@
 	"name": "Status Effect Bars",
 	"description": "Adds small customizable bars to the status effects overlay and in the inventory to show the remaining duration of effects.",
 	"authors": [
-		"Neecko5b84"
+		"A5b84"
 	],
 	"contributors": [
 		"cmplstofB",
-		"FITFC"
+		"FITFC",
+		"NiTiSon",
+		"TheLegendofSaram",
+		"Xinyang-Gao"
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/status-effect-bars",
