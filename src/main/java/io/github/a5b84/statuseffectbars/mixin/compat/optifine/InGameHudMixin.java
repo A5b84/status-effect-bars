@@ -1,7 +1,6 @@
 package io.github.a5b84.statuseffectbars.mixin.compat.optifine;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
