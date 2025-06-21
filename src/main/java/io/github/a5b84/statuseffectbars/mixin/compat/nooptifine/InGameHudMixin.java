@@ -24,7 +24,7 @@ public abstract class InGameHudMixin {
     @Unique private static final int ICON_SIZE = 24;
 
     @Inject(method = "renderStatusEffectOverlay",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;getEffectTexture(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/util/Identifier;", ordinal = 0))
     private void onRenderStatusEffectOverlay(
             DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci,
             @Local StatusEffectInstance effect, @Local(ordinal = 2) int x, @Local(ordinal = 3) int y) {

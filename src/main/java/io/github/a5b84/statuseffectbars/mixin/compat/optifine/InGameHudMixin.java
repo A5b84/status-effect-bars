@@ -39,7 +39,7 @@ public abstract class InGameHudMixin {
     }
 
     @Inject(method = "renderStatusEffectOverlay",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/StatusEffectSpriteManager;getSprite(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/client/texture/Sprite;", ordinal = 0))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;getEffectTexture(Lnet/minecraft/registry/entry/RegistryEntry;)Lnet/minecraft/util/Identifier;", ordinal = 0))
     private void onRenderStatusEffectOverlay(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci, @Local StatusEffectInstance effect) {
         // Mirroring vanilla behavior (easier than capturing locals because of OptiFine)
         int x = context.getScaledWindowWidth();
