@@ -12,6 +12,7 @@ Requires Cloth Config ([CurseForge](https://www.curseforge.com/minecraft/mc-mods
 ## Credits
 - Potentially inspired by [SkyUI](https://www.nexusmods.com/skyrim/mods/3863)'s active effects HUD
 - Config screen powered by Cloth Config
+- `es_ar` translation by [Texaliuz](https://github.com/Texaliuz)
 - `es_mx` translation by [TheLegendofSaram](https://github.com/TheLegendofSaram)
 - `ja_jp` translation by [cmplstofB](https://github.com/cmplstofB)
 - `pt_br` translation by [FITFC](https://github.com/FITFC)
