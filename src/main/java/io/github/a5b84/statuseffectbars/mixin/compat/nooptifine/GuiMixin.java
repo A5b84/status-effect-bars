@@ -30,7 +30,7 @@ public abstract class GuiMixin {
           @At(
               value = "INVOKE",
               target =
-                  "Lnet/minecraft/client/gui/Gui;getMobEffectSprite(Lnet/minecraft/core/Holder;)Lnet/minecraft/resources/ResourceLocation;",
+                  "Lnet/minecraft/client/gui/Gui;getMobEffectSprite(Lnet/minecraft/core/Holder;)Lnet/minecraft/resources/Identifier;",
               ordinal = 0))
   private void onRenderEffects(
       GuiGraphics guiGraphics,
