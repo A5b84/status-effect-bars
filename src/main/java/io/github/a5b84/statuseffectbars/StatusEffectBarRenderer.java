@@ -1,5 +1,7 @@
 package io.github.a5b84.statuseffectbars;
 
+import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
+
 import io.github.a5b84.statuseffectbars.config.StatusEffectBarsConfig.LayoutConfig;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
@@ -7,92 +9,97 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.jetbrains.annotations.Nullable;
 
-import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
-
 public class StatusEffectBarRenderer {
 
-    @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(GuiGraphics guiGraphics, @Nullable DeltaTracker deltaTracker, MobEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
-        // Special cases where the bar is hidden
+  @SuppressWarnings("SuspiciousNameCombination")
+  public static void render(
+      GuiGraphics guiGraphics,
+      @Nullable DeltaTracker deltaTracker,
+      MobEffectInstance effect,
+      int x,
+      int y,
+      int width,
+      int height,
+      LayoutConfig layoutConfig) {
+    // Special cases where the bar is hidden
 
-        if (!layoutConfig.enabled) return;
+    if (!layoutConfig.enabled) return;
 
-        if (effect.getDuration() > config.maxRemainingDuration || effect.isInfiniteDuration()) {
-            return; // Too much time remaining
-        }
-
-        MobEffectInstanceDuck duck = (MobEffectInstanceDuck) effect;
-        int age = duck.statusEffectBars_getMaxDuration() - effect.getDuration();
-        if (effect.isAmbient() && age < config.minAmbientAge) {
-            return; // Beacon effect too recent (will probably be refreshed soon)
-        }
-
-        if (layoutConfig.direction.swapXY) {
-            int tmp = width;
-            width = height;
-            height = tmp;
-        }
-
-        // start--------+-----end
-        // |            |       |
-        // +---------middle-----+
-        // or
-        // start----+
-        // |        |
-        // |        |
-        // +---middle
-        // |        |
-        // end------+
-        int startX, middleX, endX;
-        int startY, middleY, endY;
-
-        startX = layoutConfig.collinearOffset + layoutConfig.collinearPadding;
-        endX = layoutConfig.collinearOffset + width - layoutConfig.collinearPadding;
-        if (layoutConfig.direction.reverseAxis) {
-            int tmp = startX;
-            startX = endX;
-            endX = tmp;
-        }
-
-        float tickDelta = deltaTracker != null
-                ? deltaTracker.getGameTimeDeltaPartialTick(false)
-                : 0;
-        float progress = (effect.getDuration() - tickDelta) / ((MobEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
-        middleX = Mth.lerpInt(progress, startX, endX);
-
-        startY = layoutConfig.orthogonalOffset;
-        if (layoutConfig.relativeToEnd) {
-            startY = height - (startY + layoutConfig.thickness);
-        }
-        middleY = startY + layoutConfig.thickness;
-        endY = startY;
-
-        if (layoutConfig.direction.swapXY) {
-            // Swapping X and Y to make the bar vertical instead of horizontal
-            int tmp;
-
-            tmp = startX;
-            startX = startY;
-            startY = tmp;
-
-            tmp = middleX;
-            middleX = middleY;
-            middleY = tmp;
-
-            tmp = endX;
-            endX = endY;
-            endY = tmp;
-        }
-
-        startX += x;
-        middleX += x;
-        endX += x;
-        startY += y;
-        middleY += y;
-        endY += y;
-
-        guiGraphics.fill(startX, startY, middleX, middleY, config.getColor(effect));
-        guiGraphics.fill(middleX, middleY, endX, endY, config.backgroundColor);
+    if (effect.getDuration() > config.maxRemainingDuration || effect.isInfiniteDuration()) {
+      return; // Too much time remaining
     }
 
+    MobEffectInstanceDuck duck = (MobEffectInstanceDuck) effect;
+    int age = duck.statusEffectBars_getMaxDuration() - effect.getDuration();
+    if (effect.isAmbient() && age < config.minAmbientAge) {
+      return; // Beacon effect too recent (will probably be refreshed soon)
+    }
+
+    if (layoutConfig.direction.swapXY) {
+      int tmp = width;
+      width = height;
+      height = tmp;
+    }
+
+    // start--------+-----end
+    // |            |       |
+    // +---------middle-----+
+    // or
+    // start----+
+    // |        |
+    // |        |
+    // +---middle
+    // |        |
+    // end------+
+    int startX, middleX, endX;
+    int startY, middleY, endY;
+
+    startX = layoutConfig.collinearOffset + layoutConfig.collinearPadding;
+    endX = layoutConfig.collinearOffset + width - layoutConfig.collinearPadding;
+    if (layoutConfig.direction.reverseAxis) {
+      int tmp = startX;
+      startX = endX;
+      endX = tmp;
+    }
+
+    float tickDelta = deltaTracker != null ? deltaTracker.getGameTimeDeltaPartialTick(false) : 0;
+    float progress =
+        (effect.getDuration() - tickDelta)
+            / ((MobEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
+    middleX = Mth.lerpInt(progress, startX, endX);
+
+    startY = layoutConfig.orthogonalOffset;
+    if (layoutConfig.relativeToEnd) {
+      startY = height - (startY + layoutConfig.thickness);
+    }
+    middleY = startY + layoutConfig.thickness;
+    endY = startY;
+
+    if (layoutConfig.direction.swapXY) {
+      // Swapping X and Y to make the bar vertical instead of horizontal
+      int tmp;
+
+      tmp = startX;
+      startX = startY;
+      startY = tmp;
+
+      tmp = middleX;
+      middleX = middleY;
+      middleY = tmp;
+
+      tmp = endX;
+      endX = endY;
+      endY = tmp;
+    }
+
+    startX += x;
+    middleX += x;
+    endX += x;
+    startY += y;
+    middleY += y;
+    endY += y;
+
+    guiGraphics.fill(startX, startY, middleX, middleY, config.getColor(effect));
+    guiGraphics.fill(middleX, middleY, endX, endY, config.backgroundColor);
+  }
 }

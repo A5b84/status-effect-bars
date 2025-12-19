@@ -7,14 +7,13 @@ import net.fabricmc.api.ClientModInitializer;
 
 public class StatusEffectBars implements ClientModInitializer {
 
-    public static final String MOD_ID = "status-effect-bars";
+  public static final String MOD_ID = "status-effect-bars";
 
-    public static StatusEffectBarsConfig config;
+  public static StatusEffectBarsConfig config;
 
-    @Override
-    public void onInitializeClient() {
-        AutoConfig.register(StatusEffectBarsConfig.class, GsonConfigSerializer::new);
-        config = AutoConfig.getConfigHolder(StatusEffectBarsConfig.class).getConfig();
-    }
-
+  @Override
+  public void onInitializeClient() {
+    AutoConfig.register(StatusEffectBarsConfig.class, GsonConfigSerializer::new);
+    config = AutoConfig.getConfigHolder(StatusEffectBarsConfig.class).getConfig();
+  }
 }
