@@ -1,10 +1,10 @@
 package io.github.a5b84.statuseffectbars;
 
 import io.github.a5b84.statuseffectbars.config.StatusEffectBarsConfig.LayoutConfig;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.jetbrains.annotations.Nullable;
 
 import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
@@ -12,16 +12,16 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 public class StatusEffectBarRenderer {
 
     @SuppressWarnings("SuspiciousNameCombination")
-    public static void render(DrawContext context, @Nullable RenderTickCounter tickCounter, StatusEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
+    public static void render(GuiGraphics guiGraphics, @Nullable DeltaTracker deltaTracker, MobEffectInstance effect, int x, int y, int width, int height, LayoutConfig layoutConfig) {
         // Special cases where the bar is hidden
 
         if (!layoutConfig.enabled) return;
 
-        if (effect.getDuration() > config.maxRemainingDuration || effect.isInfinite()) {
+        if (effect.getDuration() > config.maxRemainingDuration || effect.isInfiniteDuration()) {
             return; // Too much time remaining
         }
 
-        StatusEffectInstanceDuck duck = (StatusEffectInstanceDuck) effect;
+        MobEffectInstanceDuck duck = (MobEffectInstanceDuck) effect;
         int age = duck.statusEffectBars_getMaxDuration() - effect.getDuration();
         if (effect.isAmbient() && age < config.minAmbientAge) {
             return; // Beacon effect too recent (will probably be refreshed soon)
@@ -54,11 +54,11 @@ public class StatusEffectBarRenderer {
             endX = tmp;
         }
 
-        float tickDelta = tickCounter != null
-                ? tickCounter.getTickProgress(false)
+        float tickDelta = deltaTracker != null
+                ? deltaTracker.getGameTimeDeltaPartialTick(false)
                 : 0;
-        float progress = (effect.getDuration() - tickDelta) / ((StatusEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
-        middleX = MathHelper.lerp(progress, startX, endX);
+        float progress = (effect.getDuration() - tickDelta) / ((MobEffectInstanceDuck) effect).statusEffectBars_getMaxDuration();
+        middleX = Mth.lerpInt(progress, startX, endX);
 
         startY = layoutConfig.orthogonalOffset;
         if (layoutConfig.relativeToEnd) {
@@ -91,8 +91,8 @@ public class StatusEffectBarRenderer {
         middleY += y;
         endY += y;
 
-        context.fill(startX, startY, middleX, middleY, config.getColor(effect));
-        context.fill(middleX, middleY, endX, endY, config.backgroundColor);
+        guiGraphics.fill(startX, startY, middleX, middleY, config.getColor(effect));
+        guiGraphics.fill(middleX, middleY, endX, endY, config.backgroundColor);
     }
 
 }

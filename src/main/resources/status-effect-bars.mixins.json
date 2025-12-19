@@ -4,11 +4,11 @@
 	"plugin": "io.github.a5b84.statuseffectbars.mixin.StatusEffectBarsMixinPlugin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"compat.nooptifine.InGameHudMixin",
-		"compat.optifine.InGameHudMixin",
+		"EffectsInInventoryMixin",
 		"LivingEntityMixin",
-		"StatusEffectInstanceMixin",
-		"StatusEffectsDisplayMixin"
+		"MobEffectInstanceMixin",
+		"compat.nooptifine.GuiMixin",
+		"compat.optifine.GuiMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -10,8 +10,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDispla
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.PrefixText;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.TransitiveObject;
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 
 @Config(name = StatusEffectBars.MOD_ID)
 public class StatusEffectBarsConfig implements ConfigData {
@@ -34,7 +34,7 @@ public class StatusEffectBarsConfig implements ConfigData {
     @ColorPicker(allowAlpha = true)
     public int neutralForegroundColor = beneficialForegroundColor;
 
-    public int getColor(StatusEffectInstance effect) {
+    public int getColor(MobEffectInstance effect) {
         return colorMode.getColor(this, effect);
     }
 

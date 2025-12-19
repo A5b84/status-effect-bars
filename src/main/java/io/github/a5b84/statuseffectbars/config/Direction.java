@@ -1,6 +1,6 @@
 package io.github.a5b84.statuseffectbars.config;
 
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.resources.language.I18n;
 
 @SuppressWarnings("unused")
 public enum Direction {
@@ -19,7 +19,7 @@ public enum Direction {
 
     @Override
     public String toString() {
-        return I18n.translate("text.autoconfig.status-effect-bars.option.direction." + name());
+        return I18n.get("text.autoconfig.status-effect-bars.option.direction." + name());
     }
 
 }

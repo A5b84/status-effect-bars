@@ -1,7 +1,7 @@
 package io.github.a5b84.statuseffectbars.mixin;
 
-import io.github.a5b84.statuseffectbars.StatusEffectInstanceDuck;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import io.github.a5b84.statuseffectbars.MobEffectInstanceDuck;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,26 +14,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Adds the {@link #maxDuration} attribute used for rendering.
  */
-@Mixin(StatusEffectInstance.class)
-public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceDuck {
+@Mixin(MobEffectInstance.class)
+public abstract class MobEffectInstanceMixin implements MobEffectInstanceDuck {
 
     @Unique private int maxDuration;
     @Shadow private int duration;
 
-    @Inject(method = "<init>(Lnet/minecraft/registry/entry/RegistryEntry;IIZZZLnet/minecraft/entity/effect/StatusEffectInstance;)V",
+    @Inject(method = "<init>(Lnet/minecraft/core/Holder;IIZZZLnet/minecraft/world/effect/MobEffectInstance;)V",
             at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         maxDuration = duration;
     }
 
-    @Inject(method = "copyFrom", at = @At("RETURN"))
-    private void onCopyFrom(StatusEffectInstance that, CallbackInfo ci) {
-        maxDuration = ((StatusEffectInstanceMixin) (Object) that).maxDuration;
+    @Inject(method = "setDetailsFrom", at = @At("RETURN"))
+    private void onCopyFrom(MobEffectInstance effect, CallbackInfo ci) {
+        maxDuration = ((MobEffectInstanceMixin) (Object) effect).maxDuration;
     }
 
-    @Inject(method = "upgrade", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;duration:I", opcode = Opcodes.PUTFIELD))
-    private void onUpgrade(StatusEffectInstance that, CallbackInfoReturnable<Boolean> cir) {
-        maxDuration = ((StatusEffectInstanceMixin) (Object) that).maxDuration;
+    @Inject(method = "update", at = @At(value = "FIELD", target = "Lnet/minecraft/world/effect/MobEffectInstance;duration:I", opcode = Opcodes.PUTFIELD))
+    private void onUpgrade(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
+        maxDuration = ((MobEffectInstanceMixin) (Object) effect).maxDuration;
     }
 
     @Override
