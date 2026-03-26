@@ -19,10 +19,10 @@ public abstract class LivingEntityMixin {
       MobEffectInstance effect,
       Entity source,
       CallbackInfo ci,
-      @Local(ordinal = 1) MobEffectInstance oldEffect) {
-    if (oldEffect != null && oldEffect.getAmplifier() == effect.getAmplifier()) {
+      @Local(name = "previousEffect") MobEffectInstance previousEffect) {
+    if (previousEffect != null && previousEffect.getAmplifier() == effect.getAmplifier()) {
       MobEffectInstanceDuck duck = (MobEffectInstanceDuck) effect;
-      MobEffectInstanceDuck oldDuck = (MobEffectInstanceDuck) oldEffect;
+      MobEffectInstanceDuck oldDuck = (MobEffectInstanceDuck) previousEffect;
       if (duck.statusEffectBars_getMaxDuration() < oldDuck.statusEffectBars_getMaxDuration()) {
         duck.statusEffectBars_setMaxDuration(oldDuck.statusEffectBars_getMaxDuration());
       }

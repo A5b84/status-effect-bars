@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,21 +25,21 @@ public abstract class GuiMixin {
   @Unique private static final int ICON_SIZE = 24;
 
   @Inject(
-      method = "renderEffects",
+      method = "extractEffects",
       at =
           @At(
               value = "INVOKE",
               target =
                   "Lnet/minecraft/client/gui/Gui;getMobEffectSprite(Lnet/minecraft/core/Holder;)Lnet/minecraft/resources/Identifier;",
               ordinal = 0))
-  private void onRenderEffects(
-      GuiGraphics guiGraphics,
+  private void onExtractEffects(
+      GuiGraphicsExtractor graphics,
       DeltaTracker deltaTracker,
       CallbackInfo ci,
-      @Local MobEffectInstance effect,
-      @Local(ordinal = 2) int x,
-      @Local(ordinal = 3) int y) {
+      @Local(name = "instance") MobEffectInstance instance,
+      @Local(name = "x") int x,
+      @Local(name = "y") int y) {
     StatusEffectBarRenderer.render(
-        guiGraphics, deltaTracker, effect, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
+        graphics, deltaTracker, instance, x, y, ICON_SIZE, ICON_SIZE, config.hudLayout);
   }
 }

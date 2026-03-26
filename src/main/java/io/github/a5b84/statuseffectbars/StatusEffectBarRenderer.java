@@ -4,7 +4,7 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 
 import io.github.a5b84.statuseffectbars.config.StatusEffectBarsConfig.LayoutConfig;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +13,7 @@ public class StatusEffectBarRenderer {
 
   @SuppressWarnings("SuspiciousNameCombination")
   public static void render(
-      GuiGraphics guiGraphics,
+      GuiGraphicsExtractor graphics,
       @Nullable DeltaTracker deltaTracker,
       MobEffectInstance effect,
       int x,
@@ -99,7 +99,7 @@ public class StatusEffectBarRenderer {
     middleY += y;
     endY += y;
 
-    guiGraphics.fill(startX, startY, middleX, middleY, config.getColor(effect));
-    guiGraphics.fill(middleX, middleY, endX, endY, config.backgroundColor);
+    graphics.fill(startX, startY, middleX, middleY, config.getColor(effect));
+    graphics.fill(middleX, middleY, endX, endY, config.backgroundColor);
   }
 }

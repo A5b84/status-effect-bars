@@ -5,7 +5,7 @@ import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import java.util.Collection;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,31 +18,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EffectsInInventoryMixin {
 
   @Inject(
-      method = "renderEffects",
+      method = "extractEffects",
       at =
           @At(
               value = "INVOKE",
               target =
-                  "Lnet/minecraft/client/gui/screens/inventory/EffectsInInventory;renderText(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/Font;IIIIII)V"))
+                  "Lnet/minecraft/client/gui/screens/inventory/EffectsInInventory;extractText(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/Font;IIIIII)V"))
   private void onDrawStatusEffectBackground(
-      GuiGraphics guiGraphics,
+      GuiGraphicsExtractor graphics,
       Collection<MobEffectInstance> effects,
-      int x,
-      int rowSpacing,
-      int k,
-      int l,
+      int x0,
+      int yStep,
+      int mouseX,
+      int mouseY,
       int maxWidth,
       CallbackInfo ci,
-      @Local(ordinal = 5) int y,
-      @Local(ordinal = 6) int actualWidth,
-      @Local MobEffectInstance effect) {
+      @Local(name = "y0") int y0,
+      @Local(name = "textureWidth") int textureWidth,
+      @Local(name = "effect") MobEffectInstance effect) {
     StatusEffectBarRenderer.render(
-        guiGraphics,
+        graphics,
         null,
         effect,
-        x,
-        y,
-        actualWidth,
+        x0,
+        y0,
+        textureWidth,
         EffectsInInventory.SPRITE_SQUARE_SIZE,
         config.inventoryLayout);
   }
