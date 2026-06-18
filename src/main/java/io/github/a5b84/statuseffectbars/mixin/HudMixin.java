@@ -1,12 +1,12 @@
-package io.github.a5b84.statuseffectbars.mixin.compat.nooptifine;
+package io.github.a5b84.statuseffectbars.mixin;
 
 import static io.github.a5b84.statuseffectbars.StatusEffectBars.config;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.a5b84.statuseffectbars.StatusEffectBarRenderer;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.Hud;
 import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -14,13 +14,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * Renders the duration bars under status effects.
- *
- * @see io.github.a5b84.statuseffectbars.mixin.compat.optifine.GuiMixin
- */
-@Mixin(Gui.class)
-public abstract class GuiMixin {
+/** Renders the duration bars under status effects. */
+@Mixin(Hud.class)
+public abstract class HudMixin {
 
   @Unique private static final int ICON_SIZE = 24;
 
@@ -30,7 +26,7 @@ public abstract class GuiMixin {
           @At(
               value = "INVOKE",
               target =
-                  "Lnet/minecraft/client/gui/Gui;getMobEffectSprite(Lnet/minecraft/core/Holder;)Lnet/minecraft/resources/Identifier;",
+                  "Lnet/minecraft/client/gui/Hud;getMobEffectSprite(Lnet/minecraft/core/Holder;)Lnet/minecraft/resources/Identifier;",
               ordinal = 0))
   private void onExtractEffects(
       GuiGraphicsExtractor graphics,

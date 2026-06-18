@@ -16,12 +16,12 @@ public abstract class LivingEntityMixin {
 
   @Inject(method = "forceAddEffect", at = @At(value = "TAIL"))
   private void onSetStatusEffect(
-      MobEffectInstance effect,
+      MobEffectInstance newEffect,
       Entity source,
       CallbackInfo ci,
       @Local(name = "previousEffect") MobEffectInstance previousEffect) {
-    if (previousEffect != null && previousEffect.getAmplifier() == effect.getAmplifier()) {
-      MobEffectInstanceDuck duck = (MobEffectInstanceDuck) effect;
+    if (previousEffect != null && previousEffect.getAmplifier() == newEffect.getAmplifier()) {
+      MobEffectInstanceDuck duck = (MobEffectInstanceDuck) newEffect;
       MobEffectInstanceDuck oldDuck = (MobEffectInstanceDuck) previousEffect;
       if (duck.statusEffectBars_getMaxDuration() < oldDuck.statusEffectBars_getMaxDuration()) {
         duck.statusEffectBars_setMaxDuration(oldDuck.statusEffectBars_getMaxDuration());

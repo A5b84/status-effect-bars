@@ -2,14 +2,18 @@ package io.github.a5b84.statuseffectbars.config;
 
 import java.util.function.ToIntBiFunction;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.effect.MobEffectInstance;
 
 public enum ColorMode {
-  EFFECT_COLOR((config, effect) -> effect.getEffect().value().getColor() | 0xff000000),
+  EFFECT_COLOR((_, effect) -> effect.getEffect().value().getColor() | 0xff000000),
   @SuppressWarnings({"ConstantConditions", "unused"})
   CATEGORY_COLOR(
       (config, effect) ->
-          effect.getEffect().value().getCategory().getTooltipFormatting().getColor() | 0xff000000),
+          TextColor.fromLegacyFormat(
+                      effect.getEffect().value().getCategory().getTooltipFormatting())
+                  .getValue()
+              | 0xff000000),
   @SuppressWarnings("unused")
   CUSTOM(
       (config, effect) ->

@@ -26,7 +26,7 @@ public abstract class EffectsInInventoryMixin {
                   "Lnet/minecraft/client/gui/screens/inventory/EffectsInInventory;extractText(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/Font;IIIIII)V"))
   private void onDrawStatusEffectBackground(
       GuiGraphicsExtractor graphics,
-      Collection<MobEffectInstance> effects,
+      Collection<MobEffectInstance> activeEffects,
       int x0,
       int yStep,
       int mouseX,

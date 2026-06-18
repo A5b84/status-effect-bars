@@ -27,8 +27,8 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceDuck {
   }
 
   @Inject(method = "setDetailsFrom", at = @At("RETURN"))
-  private void onCopyFrom(MobEffectInstance effect, CallbackInfo ci) {
-    maxDuration = ((MobEffectInstanceMixin) (Object) effect).maxDuration;
+  private void onCopyFrom(MobEffectInstance copy, CallbackInfo ci) {
+    maxDuration = ((MobEffectInstanceMixin) (Object) copy).maxDuration;
   }
 
   @Inject(
@@ -38,8 +38,8 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceDuck {
               value = "FIELD",
               target = "Lnet/minecraft/world/effect/MobEffectInstance;duration:I",
               opcode = Opcodes.PUTFIELD))
-  private void onUpgrade(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
-    maxDuration = ((MobEffectInstanceMixin) (Object) effect).maxDuration;
+  private void onUpgrade(MobEffectInstance takeOver, CallbackInfoReturnable<Boolean> cir) {
+    maxDuration = ((MobEffectInstanceMixin) (Object) takeOver).maxDuration;
   }
 
   @Override

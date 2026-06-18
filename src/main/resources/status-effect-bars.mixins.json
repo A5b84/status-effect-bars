@@ -1,14 +1,12 @@
 {
 	"required": true,
 	"package": "io.github.a5b84.statuseffectbars.mixin",
-	"plugin": "io.github.a5b84.statuseffectbars.mixin.StatusEffectBarsMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"EffectsInInventoryMixin",
+		"HudMixin",
 		"LivingEntityMixin",
-		"MobEffectInstanceMixin",
-		"compat.nooptifine.GuiMixin",
-		"compat.optifine.GuiMixin"
+		"MobEffectInstanceMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
